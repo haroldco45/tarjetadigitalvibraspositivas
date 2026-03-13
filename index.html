@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tarjeta Digital - VIBRAS POSITIVAS</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-bg: #0f172a;
+            --card-bg: #ffffff;
+            --accent-green: #22c55e;
+            --tech-blue: #3b82f6;
+            --vibras-dark: #000000;
+            --text-main: #1e293b;
+        }
+
+        body {
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            background: var(--primary-bg);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .card-container {
+            width: 100%;
+            max-width: 450px;
+            background: var(--card-bg);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+        }
+
+        /* Cabecera con Logo Pro */
+        .header { position: relative; background: #000; height: 180px; }
+        .cover-photo { 
+            width: 100%; height: 100%; 
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7)), url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop');
+            background-size: cover;
+        }
+
+        .profile-logo { 
+            width: 150px; height: 150px; background: #000; 
+            border-radius: 15px; border: 3px solid var(--accent-green); 
+            position: absolute; bottom: -75px; left: 50%; 
+            transform: translateX(-50%); z-index: 2;
+            object-fit: contain; padding: 5px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        /* Títulos y Jerarquía */
+        .business-info { margin-top: 90px; text-align: center; padding: 0 20px; }
+        
+        .asetechm-label { 
+            font-size: 13px; color: var(--accent-green); font-weight: 700; 
+            letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px;
+        }
+
+        .vibras-title { 
+            font-size: 38px; margin: 0; color: var(--vibras-dark); 
+            font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase;
+        }
+
+        .tagline { color: var(--text-main); font-size: 14px; margin-top: 8px; font-weight: 500; }
+
+        /* Botones de Acción */
+        .action-buttons {
+            display: grid; grid-template-columns: repeat(4, 1fr); 
+            gap: 10px; padding: 25px 20px;
+        }
+        .btn-item {
+            display: flex; flex-direction: column; align-items: center; 
+            text-decoration: none; color: var(--text-main); font-size: 10px; font-weight: 700;
+        }
+        .btn-icon {
+            width: 50px; height: 50px; background: var(--vibras-dark);
+            border-radius: 12px; display: flex; justify-content: center; align-items: center; 
+            margin-bottom: 8px; color: var(--accent-green); font-size: 20px;
+        }
+
+        /* Sección de Servicios del Catálogo */
+        .section { padding: 20px; background: #f8fafc; }
+        .section h2 { font-size: 15px; color: var(--vibras-dark); border-left: 5px solid var(--accent-green); padding-left: 12px; margin-bottom: 15px; text-transform: uppercase; font-weight: 800; }
+        .services-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
+        .service-card { background: white; padding: 15px; border-radius: 12px; font-size: 13px; font-weight: 700; border: 1px solid #e2e8f0; display: flex; align-items: center; gap: 15px; }
+        .service-card i { color: var(--accent-green); font-size: 18px; width: 25px; text-align: center; }
+
+        /* Links de Contacto */
+        .info-list { list-style: none; padding: 0; margin: 0; }
+        .info-item {
+            display: flex; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; 
+            align-items: center; text-decoration: none; color: var(--text-main); font-size: 14px;
+        }
+        .info-item i { width: 35px; color: var(--accent-green); font-size: 18px; }
+
+        /* Banner de Lanzamiento */
+        .promo-bar { background: #dcfce7; color: #166534; text-align: center; padding: 12px; font-size: 12px; font-weight: 800; border-top: 2px solid var(--accent-green); }
+
+        /* Footer */
+        .footer-credits {
+            padding: 30px; text-align: center; background: #000; color: white; font-size: 11px;
+        }
+        .footer-credits b { color: var(--accent-green); }
+
+        /* Controles */
+        .admin-controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
+        .fab { width: 55px; height: 55px; border-radius: 50%; border: none; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
+        .btn-edit { background: var(--tech-blue); }
+        .btn-vcf { background: var(--accent-green); }
+        
+        .edit-mode [contenteditable="true"] { background: #fffde7; outline: 2px dashed var(--tech-blue); }
+    </style>
+</head>
+<body class="edit-mode">
+
+<div class="admin-controls">
+    <button id="edit-toggle" class="fab btn-edit" title="Modo Dueño"><i class="fa-solid fa-pencil"></i></button>
+    <button onclick="downloadVCF()" class="fab btn-vcf" title="Guardar Contacto"><i class="fa-solid fa-floppy-disk"></i></button>
+</div>
+
+<div class="card-container">
+    <div class="header">
+        <div class="cover-photo"></div>
+        <img src="logoasetechm.PNG" alt="Logo ASETEC HM" class="profile-logo">
+    </div>
+
+    <div class="business-info">
+        <div class="asetechm-label" contenteditable="true">ASETEC HM</div>
+        <h1 class="vibras-title" contenteditable="true">VIBRAS POSITIVAS</h1>
+        <div class="tagline" contenteditable="true">PLATAFORMA DIGITAL PARA TU NEGOCIO</div>
+    </div>
+
+    <div class="action-buttons">
+        <a href="tel:3117700431" class="btn-item">
+            <div class="btn-icon"><i class="fa-solid fa-phone"></i></div>
+            Llamar
+        </a>
+        <a href="https://wa.me/573117700431" class="btn-item">
+            <div class="btn-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            WhatsApp
+        </a>
+        <a href="mailto:haroldco45@gmail.com" class="btn-item">
+            <div class="btn-icon"><i class="fa-solid fa-envelope"></i></div>
+            Correo
+        </a>
+        <button onclick="compartir()" class="btn-item" style="background:none; border:none; cursor:pointer;">
+            <div class="btn-icon"><i class="fa-solid fa-share-nodes"></i></div>
+            Compartir
+        </button>
+    </div>
+
+    <div class="section">
+        <h2>Servicios Especializados</h2>
+        <div class="services-grid">
+            <div class="service-card"><i class="fa-solid fa-qrcode"></i> Digitalización de Menús y Catálogos</div>
+            <div class="service-card"><i class="fa-solid fa-truck-fast"></i> Gestión de Pedidos y Logística</div>
+            <div class="service-card"><i class="fa-solid fa-share-nodes"></i> Publicidad y Redes Sociales</div>
+            <div class="service-card"><i class="fa-solid fa-laptop-code"></i> Páginas Web Profesionales</div>
+        </div>
+    </div>
+
+    <nav class="info-list">
+        <a href="https://haroldco45.github.io/asetechm/" target="_blank" class="info-item">
+            <i class="fa-solid fa-globe"></i>
+            <div style="flex:1">
+                <b>Visitar Página Web</b><br>
+                <small>haroldco45.github.io/asetechm/</small>
+            </div>
+        </a>
+        <a href="http://maps.google.com/?q=Caucasia,Antioquia" target="_blank" class="info-item">
+            <i class="fa-solid fa-location-dot"></i>
+            <div>
+                <b>Caucasia, Antioquia</b><br>
+                <small>Toca para ver ubicación GPS</small>
+            </div>
+        </a>
+        <div class="info-item" style="background: #f0fdf4;">
+            <i class="fa-solid fa-certificate" style="color: #15803d;"></i>
+            <b style="color: #15803d;">Garantía de Calidad ASETEC HM</b>
+        </div>
+    </nav>
+
+    <div class="promo-bar">
+        <i class="fa-solid fa-rocket"></i> LANZAMIENTO: ¡PRIMER MES GRATIS!
+    </div>
+
+    <footer class="footer-credits">
+        TARJETA DIGITAL DESARROLLADA POR<br>
+        <b>VIBRAS POSITIVAS</b> © 2026<br>
+        <small>DERECHOS DE AUTOR (311 770 0431)</small>
+    </footer>
+</div>
+
+<script>
+    const saveBtn = document.getElementById('edit-toggle');
+    
+    saveBtn.addEventListener('click', () => {
+        document.body.classList.toggle('edit-mode');
+        const isEditing = document.body.classList.contains('edit-mode');
+        saveBtn.innerHTML = isEditing ? '<i class="fa-solid fa-save"></i>' : '<i class="fa-solid fa-pencil"></i>';
+        saveBtn.style.background = isEditing ? "#22c55e" : "#3b82f6";
+        if(!isEditing) alert("¡Cambios actualizados!");
+    });
+
+    function compartir() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'Vibras Positivas',
+                text: 'Digitaliza tu negocio con nosotros.',
+                url: window.location.href
+            });
+        }
+    }
+
+    function downloadVCF() {
+        const vcard = "BEGIN:VCARD\nVERSION:3.0\nFN:Vibras Positivas\nTEL;TYPE=CELL:3117700431\nEMAIL:haroldco45@gmail.com\nEND:VCARD";
+        const blob = new Blob([vcard], { type: "text/vcard" });
+        const url = window.URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = "VibrasPositivas.vcf";
+        a.click();
+    }
+</script>
+
+</body>
+</html>
