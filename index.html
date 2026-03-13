@@ -51,20 +51,12 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
-        /* Títulos Definitivos y Llamativos */
+        /* Títulos */
         .business-info { margin-top: 90px; text-align: center; padding: 0 20px; }
-        
-        .asetechm-label { 
-            font-size: 14px; color: var(--accent-green); font-weight: 800; 
-            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
-            display: block;
-        }
+        .asetechm-label { font-size: 14px; color: var(--accent-green); font-weight: 800; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; display: block; }
 
-        /* EFECTO VIBRAS POSITIVAS - Animación de Alma */
         .vibras-title { 
-            font-size: 42px; margin: 0; 
-            font-weight: 900; letter-spacing: -1.5px; line-height: 1; 
-            text-transform: uppercase;
+            font-size: 42px; margin: 0; font-weight: 900; letter-spacing: -1.5px; line-height: 1; text-transform: uppercase;
             background: linear-gradient(45deg, #f06, #3cf, #0f6, #f90);
             background-size: 300% 300%;
             -webkit-background-clip: text;
@@ -79,26 +71,12 @@
             100% { background-position: 0% 50%; }
         }
 
-        .tagline { 
-            color: var(--text-main); font-size: 15px; margin-top: 12px; 
-            font-weight: 700; letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
+        .tagline { color: var(--text-main); font-size: 15px; margin-top: 12px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; }
 
         /* Botones de Acción */
-        .action-buttons {
-            display: grid; grid-template-columns: repeat(4, 1fr); 
-            gap: 10px; padding: 25px 20px;
-        }
-        .btn-item {
-            display: flex; flex-direction: column; align-items: center; 
-            text-decoration: none; color: var(--text-main); font-size: 10px; font-weight: 700;
-        }
-        .btn-icon {
-            width: 50px; height: 50px; background: var(--vibras-dark);
-            border-radius: 12px; display: flex; justify-content: center; align-items: center; 
-            margin-bottom: 8px; color: var(--accent-green); font-size: 20px;
-        }
+        .action-buttons { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; padding: 25px 20px; }
+        .btn-item { display: flex; flex-direction: column; align-items: center; text-decoration: none; color: var(--text-main); font-size: 10px; font-weight: 700; }
+        .btn-icon { width: 50px; height: 50px; background: var(--vibras-dark); border-radius: 12px; display: flex; justify-content: center; align-items: center; margin-bottom: 8px; color: var(--accent-green); font-size: 20px; }
 
         /* Servicios */
         .section { padding: 20px; background: #f8fafc; }
@@ -109,30 +87,33 @@
 
         /* Links de Contacto */
         .info-list { list-style: none; padding: 0; margin: 0; }
-        .info-item {
-            display: flex; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; 
-            align-items: center; text-decoration: none; color: var(--text-main); font-size: 14px;
-        }
+        .info-item { display: flex; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; align-items: center; text-decoration: none; color: var(--text-main); font-size: 14px; }
         .info-item i { width: 35px; color: var(--accent-green); font-size: 18px; }
 
-        /* Banner de Suscripción Sintetizado */
+        /* Banner de Suscripción (Controlable) */
         .promo-bar { 
             background: #fef3c7; color: #92400e; text-align: center; 
             padding: 12px; font-size: 12px; font-weight: 800; 
-            border-top: 2px solid #f59e0b; 
+            border-top: 2px solid #f59e0b;
         }
+
+        .is-paid .promo-bar { display: none; } /* Ocultar si está pagado */
 
         /* Footer */
-        .footer-credits {
-            padding: 30px; text-align: center; background: #000; color: white; font-size: 11px;
-        }
+        .footer-credits { padding: 30px; text-align: center; background: #000; color: white; font-size: 11px; }
         .footer-credits b { color: var(--accent-green); }
 
-        /* Controles */
+        /* Controles Administrativos */
         .admin-controls { position: fixed; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; z-index: 1000; }
         .fab { width: 55px; height: 55px; border-radius: 50%; border: none; color: white; font-size: 22px; cursor: pointer; box-shadow: 0 5px 15px rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center; }
         .btn-edit { background: var(--tech-blue); }
         .btn-vcf { background: var(--accent-green); }
+
+        /* Checkbox oculto para pago */
+        #payment-status-container {
+            display: none; background: #f1f5f9; padding: 10px; font-size: 12px; font-weight: 700; text-align: center; border-bottom: 1px solid #cbd5e1;
+        }
+        .edit-mode #payment-status-container { display: block; }
         
         .edit-mode [contenteditable="true"] { background: #fffde7; outline: 2px dashed var(--tech-blue); }
     </style>
@@ -144,7 +125,13 @@
     <button onclick="downloadVCF()" class="fab btn-vcf" title="Guardar Contacto"><i class="fa-solid fa-floppy-disk"></i></button>
 </div>
 
-<div class="card-container">
+<div id="main-card" class="card-container">
+    <div id="payment-status-container">
+        <label>
+            <input type="checkbox" id="check-paid"> MARCAR COMO PAGADO (Elimina letrero)
+        </label>
+    </div>
+
     <div class="header">
         <div class="cover-photo"></div>
         <img src="logoasetechm.PNG" alt="Logo ASETEC HM" class="profile-logo">
@@ -206,7 +193,7 @@
         </div>
     </nav>
 
-    <div class="promo-bar">
+    <div class="promo-bar" id="promo-banner">
         <i class="fa-solid fa-clock"></i> PRUEBA GRATIS 8 DÍAS | Desbloqueo: $30.000 (Pago único)
     </div>
 
@@ -219,12 +206,24 @@
 
 <script>
     const saveBtn = document.getElementById('edit-toggle');
+    const mainCard = document.getElementById('main-card');
+    const checkPaid = document.getElementById('check-paid');
     let editMode = false;
+
+    // Guardar estado de pago localmente
+    checkPaid.addEventListener('change', () => {
+        if(checkPaid.checked) {
+            mainCard.classList.add('is-paid');
+        } else {
+            mainCard.classList.remove('is-paid');
+        }
+    });
 
     saveBtn.addEventListener('click', () => {
         editMode = !editMode;
-        const editableElements = document.querySelectorAll('[contenteditable="true"]');
+        document.body.classList.toggle('edit-mode');
         
+        const editableElements = document.querySelectorAll('[contenteditable="true"]');
         editableElements.forEach(el => {
             el.style.outline = editMode ? "2px dashed var(--tech-blue)" : "none";
             el.style.background = editMode ? "#fffde7" : "transparent";
@@ -233,7 +232,7 @@
         saveBtn.innerHTML = editMode ? '<i class="fa-solid fa-save"></i>' : '<i class="fa-solid fa-pencil"></i>';
         saveBtn.style.background = editMode ? "#22c55e" : "#3b82f6";
         
-        if(!editMode) alert("¡Servicios actualizados correctamente!");
+        if(!editMode) alert("¡Cambios actualizados!");
     });
 
     function compartir() {
