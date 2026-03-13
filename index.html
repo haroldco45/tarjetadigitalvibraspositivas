@@ -34,7 +34,7 @@
             box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
 
-        /* Cabecera con Logo Pro */
+        /* Cabecera */
         .header { position: relative; background: #000; height: 180px; }
         .cover-photo { 
             width: 100%; height: 100%; 
@@ -51,20 +51,39 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
         }
 
-        /* Títulos y Jerarquía */
+        /* Títulos Definitivos y Llamativos */
         .business-info { margin-top: 90px; text-align: center; padding: 0 20px; }
         
         .asetechm-label { 
-            font-size: 13px; color: var(--accent-green); font-weight: 700; 
-            letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 5px;
+            font-size: 14px; color: var(--accent-green); font-weight: 800; 
+            letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px;
+            display: block;
         }
 
+        /* EFECTO VIBRAS POSITIVAS - Animación de Alma */
         .vibras-title { 
-            font-size: 38px; margin: 0; color: var(--vibras-dark); 
-            font-weight: 900; letter-spacing: -1px; line-height: 1; text-transform: uppercase;
+            font-size: 42px; margin: 0; 
+            font-weight: 900; letter-spacing: -1.5px; line-height: 1; 
+            text-transform: uppercase;
+            background: linear-gradient(45deg, #f06, #3cf, #0f6, #f90);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: gradientMove 6s ease infinite;
+            filter: drop-shadow(2px 2px 5px rgba(0,0,0,0.1));
         }
 
-        .tagline { color: var(--text-main); font-size: 14px; margin-top: 8px; font-weight: 500; }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .tagline { 
+            color: var(--text-main); font-size: 15px; margin-top: 12px; 
+            font-weight: 700; letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
 
         /* Botones de Acción */
         .action-buttons {
@@ -81,7 +100,7 @@
             margin-bottom: 8px; color: var(--accent-green); font-size: 20px;
         }
 
-        /* Sección de Servicios del Catálogo */
+        /* Servicios */
         .section { padding: 20px; background: #f8fafc; }
         .section h2 { font-size: 15px; color: var(--vibras-dark); border-left: 5px solid var(--accent-green); padding-left: 12px; margin-bottom: 15px; text-transform: uppercase; font-weight: 800; }
         .services-grid { display: grid; grid-template-columns: 1fr; gap: 8px; }
@@ -96,8 +115,12 @@
         }
         .info-item i { width: 35px; color: var(--accent-green); font-size: 18px; }
 
-        /* Banner de Lanzamiento */
-        .promo-bar { background: #dcfce7; color: #166534; text-align: center; padding: 12px; font-size: 12px; font-weight: 800; border-top: 2px solid var(--accent-green); }
+        /* Banner de Suscripción Sintetizado */
+        .promo-bar { 
+            background: #fef3c7; color: #92400e; text-align: center; 
+            padding: 12px; font-size: 12px; font-weight: 800; 
+            border-top: 2px solid #f59e0b; 
+        }
 
         /* Footer */
         .footer-credits {
@@ -114,7 +137,7 @@
         .edit-mode [contenteditable="true"] { background: #fffde7; outline: 2px dashed var(--tech-blue); }
     </style>
 </head>
-<body class="edit-mode">
+<body>
 
 <div class="admin-controls">
     <button id="edit-toggle" class="fab btn-edit" title="Modo Dueño"><i class="fa-solid fa-pencil"></i></button>
@@ -128,9 +151,9 @@
     </div>
 
     <div class="business-info">
-        <div class="asetechm-label" contenteditable="true">ASETEC HM</div>
-        <h1 class="vibras-title" contenteditable="true">VIBRAS POSITIVAS</h1>
-        <div class="tagline" contenteditable="true">PLATAFORMA DIGITAL PARA TU NEGOCIO</div>
+        <span class="asetechm-label">ASETEC HM</span>
+        <h1 class="vibras-title">VIBRAS POSITIVAS</h1>
+        <div class="tagline">PLATAFORMA DIGITAL PARA TU NEGOCIO</div>
     </div>
 
     <div class="action-buttons">
@@ -155,10 +178,10 @@
     <div class="section">
         <h2>Servicios Especializados</h2>
         <div class="services-grid">
-            <div class="service-card"><i class="fa-solid fa-qrcode"></i> Digitalización de Menús y Catálogos</div>
-            <div class="service-card"><i class="fa-solid fa-truck-fast"></i> Gestión de Pedidos y Logística</div>
-            <div class="service-card"><i class="fa-solid fa-share-nodes"></i> Publicidad y Redes Sociales</div>
-            <div class="service-card"><i class="fa-solid fa-laptop-code"></i> Páginas Web Profesionales</div>
+            <div class="service-card" contenteditable="true"><i class="fa-solid fa-qrcode"></i> Digitalización de Menús y Catálogos</div>
+            <div class="service-card" contenteditable="true"><i class="fa-solid fa-truck-fast"></i> Gestión de Pedidos y Logística</div>
+            <div class="service-card" contenteditable="true"><i class="fa-solid fa-share-nodes"></i> Publicidad y Redes Sociales</div>
+            <div class="service-card" contenteditable="true"><i class="fa-solid fa-laptop-code"></i> Páginas Web Profesionales</div>
         </div>
     </div>
 
@@ -170,7 +193,7 @@
                 <small>haroldco45.github.io/asetechm/</small>
             </div>
         </a>
-        <a href="http://maps.google.com/?q=Caucasia,Antioquia" target="_blank" class="info-item">
+        <a href="https://www.google.com/maps/search/Caucasia,+Antioquia" target="_blank" class="info-item">
             <i class="fa-solid fa-location-dot"></i>
             <div>
                 <b>Caucasia, Antioquia</b><br>
@@ -184,7 +207,7 @@
     </nav>
 
     <div class="promo-bar">
-        <i class="fa-solid fa-rocket"></i> LANZAMIENTO: ¡PRIMER MES GRATIS!
+        <i class="fa-solid fa-clock"></i> PRUEBA GRATIS 8 DÍAS | Desbloqueo: $30.000 (Pago único)
     </div>
 
     <footer class="footer-credits">
@@ -196,13 +219,21 @@
 
 <script>
     const saveBtn = document.getElementById('edit-toggle');
-    
+    let editMode = false;
+
     saveBtn.addEventListener('click', () => {
-        document.body.classList.toggle('edit-mode');
-        const isEditing = document.body.classList.contains('edit-mode');
-        saveBtn.innerHTML = isEditing ? '<i class="fa-solid fa-save"></i>' : '<i class="fa-solid fa-pencil"></i>';
-        saveBtn.style.background = isEditing ? "#22c55e" : "#3b82f6";
-        if(!isEditing) alert("¡Cambios actualizados!");
+        editMode = !editMode;
+        const editableElements = document.querySelectorAll('[contenteditable="true"]');
+        
+        editableElements.forEach(el => {
+            el.style.outline = editMode ? "2px dashed var(--tech-blue)" : "none";
+            el.style.background = editMode ? "#fffde7" : "transparent";
+        });
+
+        saveBtn.innerHTML = editMode ? '<i class="fa-solid fa-save"></i>' : '<i class="fa-solid fa-pencil"></i>';
+        saveBtn.style.background = editMode ? "#22c55e" : "#3b82f6";
+        
+        if(!editMode) alert("¡Servicios actualizados correctamente!");
     });
 
     function compartir() {
